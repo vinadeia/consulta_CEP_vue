@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Consulta Cep</title>
+</head>
+<body>
+    <section class="toolbar">
+        <img src="./icone/logo.svg">
+        <div class="vtex">
+            <p>Surreal São Paulo</p>
+            <p>vtex</p>
+        </div>
+        <img src="./icone/icone-bell.svg">
+        <span>Olá, Joaquim</span><img src="./icone/usuario.svg">
+    </section>
+    <section class="menu">
+        <nav>
+            <ul>
+                <li><a href="#"><img src="./icone/icone-busca.svg" alt=""></a></li>
+                <li><a href="#"><img src="./icone/icone-folder.svg" alt=""></a></li>
+                <li><a href="#"><img src="./icone/icone-ajuste.svg" alt=""></a></li>
+            </ul>
+        </nav>
+        <div id="app"></div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            template:`
+                <div class="container">
+                    <div class="form_btn">
+                        <div class="form-todo form-group">
+                        <form>
+                            <input placeholder="insira o CEP" type="text" maxlength="8" name="author" 
+                            class="form-control" v-model="cep" id="cep">
+                        </form>
+                    </div>
+                        <button v-on:click="consultaCep" type="submit" class="btn btn-primary">
+                            <img src="./icone/icone-plus.svg" alt="Adicionar cep à lista"> 
+                            Adicionar endereço
+                        </button>
+                    </div>
+                    <div class="card-lista-cep">
+                        <div class="card-cep" v-for="(cep, index) in ceps">
+                            <span class="lista_cep">
+                                <img src="./icone/local.svg" alt="Cep adicionado à lista">    
+                                <span>CEP</span>
+                                <span>{{cep.name}}</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="btn-gerar-enderecos">
+                        <button v-on:click="deleteCeps" type="submit" class="btn btn-primary">Apagar CEPs
+                            <img src="./icone/icone-lixo.svg" alt="Apagar lista de cep's">
+                        </button>
+                        <button v-on:click="addComment" type="submit" class="btn btn-primary">Gerar endereços</button>
+                    </div>
+                    <hr/>
+                    <div>
+                        <div class="card-logradouro" v-for="(comment, index) in comments">
+                            <div>
+                                <img src="./icone/local.svg" alt="Endereço consultado">
+                            </div>
+                            <div class="rua">
+                                <p>{{comment.logradouro}}</p>
+                                <span>{{comment.localidade}} - {{comment.uf}}</span>
+                            </div>
+                                <p><span class="endereco_gerado">{{comment.name}}</span></p>
+                            <div>
+                                <a href="#" title="Excluir" v-on:click.prevent="removeComment(index)">
+                                    <img src="./icone/icone-lixo.svg" alt="Excluir endereço"> 
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            data: function(){
+                return{
+                    comments:[],
+                    ceps:[],
+                    cep:'',
+                    cep_data:[]
+                }
+            },
+            methods:{
+                addComment: function(){
+                    for(let props in this.ceps){
+                        this.comments.push({
+                            name: this.ceps[props].name,
+                            logradouro: this.ceps[props].logradouro,
+                            localidade: this.ceps[props].localidade,
+                            uf: this.ceps[props].uf
+                        });
+                    }
+
+                    this.cep = '';
+                },
+                deleteCeps: function(){
+                    while(this.ceps.length) {
+                        this.ceps.pop();
+                    }
+                },
+                removeComment: function(index){
+                    this.comments.splice(index, 1);
+                },
+                consultaCep: function(){
+                    var self = this;
+                    if(this.cep.trim() === ''){
+                        alert('inclua um CEP');
+                        return
+                    }
+
+                    axios.get('https://viacep.com.br/ws/'+this.cep+'/json/')
+                    .then(function (response) {
+                        self.cep_data = response.data;
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    })
+                    .then(function () {
+                        self.ceps.push({
+                            name: self.cep,
+                            logradouro: self.cep_data.logradouro,
+                            localidade: self.cep_data.localidade,
+                            uf: self.cep_data.uf
+                        });
+                    });
+
+                }
+            }
+        })
+    </script>
+</body>
+</html>

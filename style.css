@@ -1,0 +1,240 @@
+body{
+    overflow: hidden;
+}
+.toolbar{
+    display: grid;
+    align-items: center;
+    background-color: #9206E9;
+    grid-template-columns: 0.1fr 0.6fr 2.6fr 0.5fr 0.1fr;
+    justify-items: end;
+}
+
+.toolbar :nth-child(3){
+    margin: 0px;
+    padding: 25px 37px;
+    border-right: 2px solid rgb(255, 255, 255, 0.2);
+}
+
+.toolbar :nth-child(4){
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
+.toolbar img{
+    margin: 14px 24px;
+}
+
+.toolbar div.vtex{
+    border: solid 3px white;
+    background-color: #9206E9;
+    color: white;
+    border-radius: 8px;
+    padding: 2px 15px;
+    width: 267px;
+    height: 62px;
+    margin-left: 10px;
+}
+.toolbar div.vtex p{
+    margin: 5px;
+}
+
+
+section.menu{
+    display: flex;
+}
+section.menu nav{
+    height: 100vh;
+    background-color: #F6F6F6;
+}
+
+section.menu nav ul{
+    padding: 0px;
+    margin: 0px;
+}
+
+section.menu li {
+    list-style: none;
+    padding: 44px 33px;
+}
+
+section.menu ul :nth-child(2){
+    padding-top: 28px;
+}
+
+section.menu ul :nth-child(3){
+    padding: 20px 15px;
+    position: fixed;
+    bottom: 0;
+}
+section.menu ul :nth-child(3) a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 74px;
+    height: 75px;
+    border-radius: 10px;
+}
+
+section.menu li a{
+    text-decoration: none;
+}
+
+section.menu li a.busca{
+    background-image: url(./icone/icone-busca.svg);
+}
+
+.container{
+    padding: 41px 52px 0px 51px;
+}
+
+.container button{
+    padding: 0px 55px;
+    border: none;
+    width: 292px;
+    height: 52px;
+    color: white;
+    background: #B600EE;
+    border-radius: 8px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container :nth-child(5){
+    max-height: 30vh;
+    content-visibility: auto;
+    overflow-y: auto;
+}
+
+div.btn-gerar-enderecos{
+    display: flex;
+    align-content: center;
+    justify-content: end;
+    margin-bottom: 56px;
+}
+
+div.btn-gerar-enderecos :nth-child(1){
+    background: #FFFFFF;
+    color: #75818C;
+    border: solid 2px #75818C;
+    justify-content: space-around;
+    margin-left: 6px;
+}
+
+div.btn-gerar-enderecos :nth-child(1) img{
+    border: none;
+}
+
+div.btn-gerar-enderecos :nth-child(2){
+    display: flex;
+    justify-content: center;
+}
+
+.card-lista-cep{
+    height: 20vh;
+    padding-top: 20px;
+    content-visibility: auto;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    margin-top: 20px;
+}
+.lista_cep{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 190px;
+    align-items: center;
+    margin-top: 19px;
+
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: 700;
+    color: #75818C;
+}
+
+.lista_cep img{
+    margin: auto;
+    height: 29px;
+}
+
+.lista_cep :nth-child(2){
+    color: #20272C;
+    margin: 0px 15px 0px 30px;
+}
+
+.lista_cep :nth-child(3){
+    opacity: 0.6;
+}
+
+hr{
+    opacity: 0.7;
+    margin-bottom: 46px;
+}
+
+.card-logradouro{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 0.6fr 0.4fr;
+    align-items: center;
+    width: 609px;
+    height: 120px;
+    margin-top: 16px;
+    box-shadow: 0px 4px 20px rgba(32, 39, 44, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+.endereco_gerado{
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: 0.01em;
+    color: #B600EE;
+}
+.card-logradouro img{
+    height: 22px;
+}
+
+.card-logradouro :nth-child(4){
+    border-left: 2px solid #E0E6EA;
+    padding: 35px 0px;
+}
+
+.card-logradouro div.rua{
+    text-align: start;
+}
+.rua p{
+    color: #424E59;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 22px;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form_btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.form-control{
+    border: 2px solid #E5E5E5;
+    padding: 16px 90px 16px 20px;
+    border-radius: 8px;
+}
+
+input::placeholder{
+    color: #75818C;
+    line-height: 22px;
+    font-weight: 400;
+    font-family: 'Open Sans', sans-serif;
+}
